@@ -18,7 +18,6 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ISuperHeroService, SuperHeroService>();
-builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

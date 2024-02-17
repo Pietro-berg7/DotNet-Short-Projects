@@ -21,4 +21,11 @@ public class SuperHeroController: ControllerBase
     {        
         return Ok(await _superHeroService.GetAllSuperHeroes());
     }
+
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<ActionResult<ServiceResponse<SuperHero>>> GetSuperHero(int id)
+    {
+        return Ok(await _superHeroService.GetSuperHero(id));
+    }
 }
