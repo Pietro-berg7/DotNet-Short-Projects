@@ -16,7 +16,7 @@ public class SuperHeroController: ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<SuperHero>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<ServiceResponse<SuperHero>>), StatusCodes.Status200OK)]
     public async Task<ActionResult<ServiceResponse<List<SuperHero>>>> GetAllHeroes()
     {
         return Ok(await _superHeroService.GetAllSuperHeroes());
@@ -24,7 +24,7 @@ public class SuperHeroController: ControllerBase
 
     [HttpGet]
     [Route("{id}")]
-    [ProducesResponseType(typeof(IEnumerable<SuperHero>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<ServiceResponse<SuperHero>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ServiceResponse<SuperHero>>> GetSuperHero(int id)
     {
@@ -37,14 +37,14 @@ public class SuperHeroController: ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(IEnumerable<SuperHero>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<ServiceResponse<SuperHero>>), StatusCodes.Status200OK)]
     public async Task<ActionResult<ServiceResponse<List<GetSuperHeroDto>>>> AddSuperHero(AddSuperHeroDto newSuperHero)
     {
         return Ok(await _superHeroService.AddSuperHero(newSuperHero));
     }
 
     [HttpPut]
-    [ProducesResponseType(typeof(IEnumerable<SuperHero>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<ServiceResponse<SuperHero>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ServiceResponse<List<GetSuperHeroDto>>>> UpdateSuperHero(UpdateSuperHeroDto updatedSuperHero)
     {
@@ -57,7 +57,7 @@ public class SuperHeroController: ControllerBase
     }
 
     [HttpDelete]
-    [ProducesResponseType(typeof(IEnumerable<SuperHero>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<ServiceResponse<SuperHero>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ServiceResponse<List<GetSuperHeroDto>>>> DeleteSuperHero(int id)
     {
