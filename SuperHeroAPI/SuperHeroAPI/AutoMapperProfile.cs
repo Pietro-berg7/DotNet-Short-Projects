@@ -9,5 +9,7 @@ public class AutoMapperProfile: Profile
     public AutoMapperProfile()
     {
         CreateMap<SuperHero, GetSuperHeroDto>();
+        CreateMap<AddSuperHeroDto, SuperHero>();
+        CreateMap<UpdateSuperHeroDto, SuperHero>();
     }
 }
