@@ -1,27 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SuperHeroAPI.Data;
 using SuperHeroAPI.Entities;
+using SuperHeroAPI.Services.SuperHeroService;
 
 namespace SuperHeroAPI.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 public class SuperHeroController: ControllerBase
 {
-    [HttpGet]
-    public async Task<ActionResult<List<SuperHero>>> GetAllHeroes()
-    {
-        var heroes = new List<SuperHero>
-        {
-            new SuperHero
-            {
-                Id = 1,
-                Name = "Spiderman",
-                FirstName = "Peter",
-                LastName = "Parker",
-                Place = "New York City"
-            }
+    private readonly ISuperHeroService _superHeroService;
 
-        };
-        
-        return Ok(heroes);
+    public SuperHeroController(ISuperHeroService superHeroService)
+    {
+        _superHeroService = superHeroService;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<ServiceResponse<List<SuperHero>>>> GetAllHeroes()
+    {        
+        return Ok(await _superHeroService.GetAllSuperHeroes());
     }
 }
