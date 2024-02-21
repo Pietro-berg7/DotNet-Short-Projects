@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MovieAPI.Data;
@@ -36,7 +37,7 @@ public class MovieService: IMovieService
             serviceResponse.Success = false;
             serviceResponse.Message = ex.Message;
         }
-        
+
         return serviceResponse;
     }
 
@@ -58,6 +59,21 @@ public class MovieService: IMovieService
             serviceResponse.Success = false;
             serviceResponse.Message = ex.Message;
         }
+
+        return serviceResponse;
+    }
+
+    public async Task<ActionResult<ServiceResponse<List<GetMovieDto>>>> AddMovie(PostMovieDto newMovie)
+    {
+        var serviceResponse = new ServiceResponse<List<GetMovieDto>>();
+        var dbMovie = _mapper.Map<Movie>(newMovie);
+
+        _context.Movies.Add(dbMovie);
+        await _context.SaveChangesAsync();
+
+        serviceResponse.Data = await _context.Movies
+            .Select(m => _mapper.Map<GetMovieDto>(m))
+            .ToListAsync();
 
         return serviceResponse;
     }

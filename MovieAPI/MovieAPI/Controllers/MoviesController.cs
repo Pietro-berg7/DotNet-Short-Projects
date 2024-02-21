@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MovieAPI.Dtos.Movie;
 using MovieAPI.Models;
 using MovieAPI.Services.MovieService;
 
@@ -30,5 +31,11 @@ public class MoviesController: ControllerBase
             return NotFound();
 
         return Ok(await _movieService.GetMovie(id));
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<ServiceResponse<Movie>>> AddMovie(PostMovieDto newMovie)
+    {
+        return Ok(await _movieService.AddMovie(newMovie));
     }
 }
