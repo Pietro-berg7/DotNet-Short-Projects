@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MovieAPI.Models;
+using MovieAPI.Data;
 
 #nullable disable
 
 namespace MovieAPI.Migrations
 {
-    [DbContext(typeof(MovieContext))]
-    [Migration("20240221061928_Initial")]
+    [DbContext(typeof(DataContext))]
+    [Migration("20240221070156_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

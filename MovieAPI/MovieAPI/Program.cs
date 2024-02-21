@@ -1,16 +1,20 @@
 using Microsoft.EntityFrameworkCore;
-using MovieAPI.Models;
+using MovieAPI.Data;
+using MovieAPI.Services.MovieService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<MovieContext>(options =>
+builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddScoped<IMovieService, MovieService>();
 
 var app = builder.Build();
 

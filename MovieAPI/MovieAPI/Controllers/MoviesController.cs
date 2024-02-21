@@ -1,39 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using MovieAPI.Models;
+using MovieAPI.Services.MovieService;
 
 namespace MovieAPI.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 public class MoviesController: ControllerBase
 {
-    private readonly MovieContext _dbContext;
+    private readonly IMovieService _movieService;
 
-    public MoviesController(MovieContext dbContext)
+    public MoviesController(IMovieService movieService)
     {
-        _dbContext = dbContext;
+        _movieService = movieService;
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Movie>>> GetMovies()
+    public async Task<ActionResult<ServiceResponse<List<Movie>>>> GetAllMovies()
     {
-        if(_dbContext.Movies is null)
+        if (await _movieService.GetAllMovies() is null)
             return NotFound();
 
-        return await _dbContext.Movies.ToListAsync();
+        return Ok(await _movieService.GetAllMovies());
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<Movie>> GetMovie(int id)
     {
-        if (_dbContext.Movies is null)
+        if (await _movieService.GetMovie(id) is null)
             return NotFound();
 
-        var movie = await _dbContext.Movies.FindAsync(id);
-
-        if (movie is null)
-            return NotFound();
-
-        return movie;
+        return Ok(await _movieService.GetMovie(id));
     }
 }
