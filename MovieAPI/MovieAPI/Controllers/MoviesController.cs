@@ -36,6 +36,19 @@ public class MoviesController: ControllerBase
     [HttpPost]
     public async Task<ActionResult<ServiceResponse<Movie>>> AddMovie(PostMovieDto newMovie)
     {
-        return Ok(await _movieService.AddMovie(newMovie));
+        var response = await _movieService.AddMovie(newMovie);
+
+        return Ok(response);
+    }
+
+    [HttpPut]
+    public async Task<ActionResult<ServiceResponse<List<Movie>>>> UpdateMovie(PutMovieDto updatedMovie)
+    {
+        var response = await _movieService.UpdateMovie(updatedMovie);
+
+        if (response.Data is null)
+            return NotFound(response);
+
+        return Ok(response);
     }
 }

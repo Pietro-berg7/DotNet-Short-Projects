@@ -63,7 +63,7 @@ public class MovieService: IMovieService
         return serviceResponse;
     }
 
-    public async Task<ActionResult<ServiceResponse<List<GetMovieDto>>>> AddMovie(PostMovieDto newMovie)
+    public async Task<ServiceResponse<List<GetMovieDto>>> AddMovie(PostMovieDto newMovie)
     {
         var serviceResponse = new ServiceResponse<List<GetMovieDto>>();
         var dbMovie = _mapper.Map<Movie>(newMovie);
@@ -74,6 +74,32 @@ public class MovieService: IMovieService
         serviceResponse.Data = await _context.Movies
             .Select(m => _mapper.Map<GetMovieDto>(m))
             .ToListAsync();
+
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<GetMovieDto>> UpdateMovie(PutMovieDto updatedMovie)
+    {
+        var serviceResponse = new ServiceResponse<GetMovieDto>();
+
+        try
+        {
+            var dbMovie = await _context.Movies
+                .FirstOrDefaultAsync(m => m.Id == updatedMovie.Id);
+
+            if (dbMovie is null)
+                throw new Exception($"Movie with id {updatedMovie.Id} not found.");
+
+            _mapper.Map(updatedMovie, dbMovie);
+
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<GetMovieDto>(dbMovie);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
 
         return serviceResponse;
     }

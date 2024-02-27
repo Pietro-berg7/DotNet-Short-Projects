@@ -10,5 +10,6 @@ public class AutoMapperProfile: Profile
     {
         CreateMap<Movie, GetMovieDto>();
         CreateMap<PostMovieDto, Movie>();
+        CreateMap<PutMovieDto, Movie>();
     }
 }
