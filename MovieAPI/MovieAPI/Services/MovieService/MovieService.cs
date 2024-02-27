@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MovieAPI.Data;
@@ -91,9 +90,36 @@ public class MovieService: IMovieService
                 throw new Exception($"Movie with id {updatedMovie.Id} not found.");
 
             _mapper.Map(updatedMovie, dbMovie);
-
             await _context.SaveChangesAsync();
+
             serviceResponse.Data = _mapper.Map<GetMovieDto>(dbMovie);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<List<GetMovieDto>>> DeleteMovie(int id)
+    {
+        var serviceResponse = new ServiceResponse<List<GetMovieDto>>();
+
+        try
+        {
+            var dbMovie = await _context.Movies
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (dbMovie is null)
+                throw new Exception($"Movie with id {id} not found.");
+
+            _context.Movies.Remove(dbMovie);
+            await _context.SaveChangesAsync();
+
+            serviceResponse.Data = await _context.Movies
+                .Select(c => _mapper.Map<GetMovieDto>(c)).ToListAsync();
         }
         catch (Exception ex)
         {

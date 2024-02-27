@@ -10,4 +10,5 @@ public interface IMovieService
     Task<ServiceResponse<GetMovieDto>> GetMovie(int id);
     Task<ServiceResponse<List<GetMovieDto>>> AddMovie(PostMovieDto newMovie);
     Task<ServiceResponse<GetMovieDto>> UpdateMovie(PutMovieDto updatedMovie);
+    Task<ServiceResponse<List<GetMovieDto>>> DeleteMovie(int id);
 }
