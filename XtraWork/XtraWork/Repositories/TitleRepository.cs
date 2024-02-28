@@ -19,7 +19,12 @@ public class TitleRepository
 
     public async Task<Title> Get(Guid id)
     {
-        return await _context.Titles.FindAsync(id);
+        var data = await _context.Titles.FindAsync(id);
+
+        if (data is null)
+            throw new Exception();
+
+        return data;
     }
 
     public async Task<Title> Create(Title title)
@@ -40,6 +45,10 @@ public class TitleRepository
     public async Task Delete(Guid id)
     {
         var title = await _context.Titles.FindAsync(id);
+
+        if (title is null)
+            throw new Exception();
+
         _context.Remove(title);
         await _context.SaveChangesAsync();
     }
