@@ -64,6 +64,26 @@ public class EmployeeService
 
     public async Task<EmployeeResponse> Create(EmployeeRequest request)
     {
+        if (string.IsNullOrWhiteSpace(request.FirstName))
+        {
+            throw new Exception("FirstName cannot be empty.");
+        }
+
+        if (string.IsNullOrWhiteSpace(request.LastName))
+        {
+            throw new Exception("LastName cannot be empty.");
+        }
+
+        if (request.BirthDate == default)
+        {
+            throw new Exception("BirthDate cannot be empty.");
+        }
+
+        if (request.TitleId == default)
+        {
+            throw new Exception("TitleId cannot be empty.");
+        }
+
         var employee = new Employee
         {
             FirstName = request.FirstName,
