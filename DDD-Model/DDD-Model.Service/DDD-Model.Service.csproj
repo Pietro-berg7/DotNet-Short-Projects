@@ -11,4 +11,10 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DDD-Model.Domain\DDD-Model.Domain.csproj" />
+    <ProjectReference Include="..\DDD-Model.Infra.CrossCutting\DDD-Model.Infra.CrossCutting.csproj" />
+    <ProjectReference Include="..\DDD-Model.Infra.Data\DDD-Model.Infra.Data.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -16,26 +16,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - CrossCutting", "4.2 - CrossCutting", "{F783A69B-122B-4B72-8F1F-A937FB7EF70C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD-Model.Application", "DDD-Model.Application\DDD-Model.Application.csproj", "{EB540EED-DB9F-485E-9617-90B7DF31A561}"
-	ProjectSection(ProjectDependencies) = postProject
-		{362FE2EA-D508-4F3B-B9F0-DFCE6A49A05B} = {362FE2EA-D508-4F3B-B9F0-DFCE6A49A05B}
-		{857671E0-0D52-46CF-9CAC-665E472AE75F} = {857671E0-0D52-46CF-9CAC-665E472AE75F}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD-Model.Domain", "DDD-Model.Domain\DDD-Model.Domain.csproj", "{857671E0-0D52-46CF-9CAC-665E472AE75F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD-Model.Service", "DDD-Model.Service\DDD-Model.Service.csproj", "{362FE2EA-D508-4F3B-B9F0-DFCE6A49A05B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{111E7342-0456-47E0-A33F-6016AEE01F57} = {111E7342-0456-47E0-A33F-6016AEE01F57}
-		{857671E0-0D52-46CF-9CAC-665E472AE75F} = {857671E0-0D52-46CF-9CAC-665E472AE75F}
-		{ED3556BC-135B-43E1-A74F-BFDD96B9987F} = {ED3556BC-135B-43E1-A74F-BFDD96B9987F}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD-Model.Infra.Data", "DDD-Model.Infra.Data\DDD-Model.Infra.Data.csproj", "{111E7342-0456-47E0-A33F-6016AEE01F57}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD-Model.Infra.CrossCutting", "DDD-Model.Infra.CrossCutting\DDD-Model.Infra.CrossCutting.csproj", "{ED3556BC-135B-43E1-A74F-BFDD96B9987F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{857671E0-0D52-46CF-9CAC-665E472AE75F} = {857671E0-0D52-46CF-9CAC-665E472AE75F}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
